@@ -71,6 +71,11 @@ Install bundle:
 $ bundle install
 ```
 
+Create database, migrate and seed it:
+```shell
+$ bundle exec rake db:create db:migrate db:seed
+```
+
 ## Configuration
 
 ```shell
