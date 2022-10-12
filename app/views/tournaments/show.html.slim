@@ -3,10 +3,13 @@ p#notice = notice
 p
   strong Name:
   = @tournament.name
+p
+  strong Status:
+  = @tournament.status_name
 
 p
-  strong Games:
-  = @tournament.games
+  strong Divisions:
+
 
 => link_to "Edit", edit_tournament_path(@tournament)
 '|

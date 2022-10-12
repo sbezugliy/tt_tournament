@@ -1,22 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "tournaments/index", type: :view do
-  before(:each) do
+RSpec.describe 'tournaments/index', type: :view do
+  before do
     assign(:tournaments, [
-      Tournament.create!(
-        name: "Name",
-        games: ""
-      ),
-      Tournament.create!(
-        name: "Name",
-        games: ""
-      )
-    ])
+             Fabricate(:tournament,
+                       name: 'World Cup',
+                       status: 1),
+             Fabricate(:tournament,
+                       name: 'Europe cup',
+                       status: 2)
+           ])
   end
 
-  it "renders a list of tournaments" do
+  xit 'renders a list of tournaments' do
     render
-    assert_select "tr>td", text: "Name".to_s, count: 2
-    assert_select "tr>td", text: "".to_s, count: 2
+    assert_select 'tbody>tr>td', text: 'World Cup'.to_s, count: 1
+    assert_select 'tbody>tr>td', text: 'Europe Cup'.to_s, count: 1
   end
 end

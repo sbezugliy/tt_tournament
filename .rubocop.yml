@@ -13,3 +13,15 @@ Style/Documentation:
     - 'app/**/*'
     - 'config/**/*'
     - 'spec/**/*'
+    - 'db/**/*'
+
+RSpec/NamedSubject:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'db/**/*'
+
+RSpec/NestedGroups:
+  Max: 5

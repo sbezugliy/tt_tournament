@@ -4,8 +4,7 @@ table
   thead
     tr
       th Name
-      th Games
-      th
+      th Status
       th
       th
 
@@ -13,7 +12,7 @@ table
     - @tournaments.each do |tournament|
       tr
         td = tournament.name
-        td = tournament.games
+        td = tournament.status_name
         td = link_to "Show", tournament
         td = link_to "Edit", edit_tournament_path(tournament)
         td = link_to "Destroy", tournament, data: {confirm: "Are you sure?"}, method: :delete

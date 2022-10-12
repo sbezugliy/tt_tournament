@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: %i[ show edit update destroy ]
+  before_action :set_tournament, only: %i[show edit update destroy]
 
   # GET /tournaments or /tournaments.json
   def index
@@ -7,18 +9,16 @@ class TournamentsController < ApplicationController
   end
 
   # GET /tournaments/1 or /tournaments/1.json
-  def show
-  end
+  def show; end
 
   # GET /tournaments/new
   def new
     @tournament = Tournament.new
-    @teams = 16.times.map { ::Faker::Sports::Football.team}
+    @teams = 16.times.map { Faker::Lorem.unique.words(number: 3).join(' ').capitalize }
   end
 
   # GET /tournaments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tournaments or /tournaments.json
   def create
@@ -26,7 +26,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to tournament_url(@tournament), notice: "Tournament was successfully created." }
+        format.html { redirect_to tournament_url(@tournament), notice: t('tournaments.successfully_created') }
         format.json { render :show, status: :created, location: @tournament }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class TournamentsController < ApplicationController
   def update
     respond_to do |format|
       if @tournament.update(tournament_params)
-        format.html { redirect_to tournament_url(@tournament), notice: "Tournament was successfully updated." }
+        format.html { redirect_to tournament_url(@tournament), notice: t('tournaments.successfully_updated') }
         format.json { render :show, status: :ok, location: @tournament }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,19 +53,20 @@ class TournamentsController < ApplicationController
     @tournament.destroy
 
     respond_to do |format|
-      format.html { redirect_to tournaments_url, notice: "Tournament was successfully destroyed." }
+      format.html { redirect_to tournaments_url, notice: t('tournaments.successfully_destroyed') }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tournament
-      @tournament = Tournament.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tournament_params
-      params.require(:tournament).permit(:name, :games)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tournament
+    @tournament = Tournament.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tournament_params
+    params.require(:tournament).permit(:name, :games)
+  end
 end

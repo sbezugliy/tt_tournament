@@ -6,3 +6,5 @@ require 'bundler/setup' # Set up gems listed in the Gemfile.
 require 'bootsnap/setup' # Speed up boot time by caching expensive operations.
 
 require 'faker'
+
+require_relative '../lib/wizard'
